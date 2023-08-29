@@ -29,7 +29,8 @@ ROLE_CLASS_MAP = {
 }
 
 load_dotenv(find_dotenv())
-openai.api_key = os.getenv("OPENAI_API_KEY")
+#openai.api_key = os.getenv("OPENAI_API_KEY")
+openai.api_key ="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"
 CONNECTION_STRING = "postgresql+psycopg2://admin:admin@postgres:5432/vectordb"
 COLLECTION_NAME="vectordb"
 
