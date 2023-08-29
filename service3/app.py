@@ -28,12 +28,14 @@ ROLE_CLASS_MAP = {
     "system": SystemMessage
 }
 
-load_dotenv(find_dotenv())
+#load_dotenv(find_dotenv())
 #openai.api_key = os.getenv("OPENAI_API_KEY")
-openai.api_key ="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"
+#openai.api_key ="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"
 CONNECTION_STRING = "postgresql+psycopg2://admin:admin@postgres:5432/vectordb"
 COLLECTION_NAME="vectordb"
-
+import os
+#load_dotenv(find_dotenv())
+os.environ["OPENAI_API_KEY"] ="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"
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -46,6 +48,8 @@ class Conversation(BaseModel):
 
 embeddings = OpenAIEmbeddings()
 chat = ChatOpenAI(temperature=0)
+
+
 store = PGVector(
     collection_name=COLLECTION_NAME,
     connection_string=CONNECTION_STRING,
