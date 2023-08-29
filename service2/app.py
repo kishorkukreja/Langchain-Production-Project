@@ -32,23 +32,27 @@ class Conversation(BaseModel):
 
 @app.get("/service2/{conversation_id}")
 async def get_conversation(conversation_id: str):
-    logger.info(f"Retrieving initial id {conversation_id}")
+    logger.info(f"GET Retrieving initial id {conversation_id}")
     existing_conversation_json = r.get(conversation_id)
     if existing_conversation_json:
+        logger.info(f"GET Connection Found {conversation_id}")
         existing_conversation = json.loads(existing_conversation_json)
         return existing_conversation
     else:
+        logger.info(f"GET Connection Not Found {conversation_id}")
         return {"error": "Conversation not found"}
 
 
 
 @app.post("/service2/{conversation_id}")
 async def service2(conversation_id: str, conversation: Conversation):
-    logger.info(f"Sending Conversation with ID {conversation_id} to OpenAI")
+    logger.info(f"POST Sending Conversation with ID {conversation_id} to OpenAI")
     existing_conversation_json = r.get(conversation_id)
     if existing_conversation_json:
+        logger.info(f"POST Connection Found {conversation_id}")
         existing_conversation = json.loads(existing_conversation_json)
     else:
+        logger.info(f"POST Connection Not Found {conversation_id}")
         existing_conversation = {"conversation": [{"role": "system", "content": "You are a helpful assistant."}]}
 
     existing_conversation["conversation"].append(conversation.dict()["conversation"][-1])
@@ -58,9 +62,9 @@ async def service2(conversation_id: str, conversation: Conversation):
     assistant_message = response.json()["reply"]
 
     existing_conversation["conversation"].append({"role": "assistant", "content": assistant_message})
-
+    logger.info(f"POST Connection New ID {conversation_id}")
     r.set(conversation_id, json.dumps(existing_conversation))
-
+    
     return existing_conversation
 
 
