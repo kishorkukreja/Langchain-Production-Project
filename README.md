@@ -1,4 +1,4 @@
-# Restaurant Chatbot Project
+# Buyer Co-Pilot Chatbot Project
 
 This project is a restaurant chatbot that is distributed across several microservices. The chatbot can answer general questions about the restaurant, such as operating hours, menu options, and health protocols.
 
