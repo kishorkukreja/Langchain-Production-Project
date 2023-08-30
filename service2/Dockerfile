@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . /app
 
-RUN pip install --no-cache-dir fastapi uvicorn redis requests openai
+RUN pip install --no-cache-dir fastapi uvicorn redis requests openai tiktoken pandas tabulate
 
 EXPOSE 80
 

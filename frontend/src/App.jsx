@@ -11,9 +11,11 @@ const App = () => {
       const conversationId = localStorage.getItem("conversationId");
       if (conversationId) {
         const response = await fetch(
-          `http://localhost:5000/service2/${conversationId}`
+          `https://n3myq3-5000.csb.app/service2/${conversationId}`
         );
+        console.log(response)
         const data = await response.json();
+        console.log(data)
         if (!data.error) {
           setConversation(data);
         }
@@ -49,15 +51,16 @@ const App = () => {
     ];
 
     const response = await fetch(
-      `http://localhost:5000/service2/${conversationId}`,
+      `https://n3myq3-5000.csb.app/service2/${conversationId}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ conversation: newConversation }),
       }
     );
-
+    console.log(response)
     const data = await response.json();
+    console.log(data)
     setConversation(data);
     setUserMessage("");
     setIsLoading(false);
